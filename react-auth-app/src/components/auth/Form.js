@@ -24,13 +24,15 @@ export class FormLogin extends Component {
             email: this.state.email,
             birthYear: this.state.birthYear
         }
-        var allData=[]
+        //VARIANTA CU LOCAL STORAGE
+        /*var allData=[]
         if(localStorage.getItem("data")){
             allData=JSON.parse(localStorage.getItem("data"))
         }
         allData.push(data)
         localStorage.setItem("data", JSON.stringify(allData))
-        this.props.setData(allData)
+        this.props.setData(allData)*/
+        this.props.setData(data)
         this.props.history.push("/")
     }
 
@@ -45,10 +47,8 @@ export class FormLogin extends Component {
                             placeholder="Enter email"
                             onChange={this.onChange}
                             value={this.state.email}
-                            //isInvalid={!!this.props?.errors?.data?.email}
                             name="email"
                         />
-                        {/* <Form.Control.Feedback type="invalid">{this.props?.errors?.data?.email}</Form.Control.Feedback> */}
                     </Form.Group>
 
                     <Form.Group>
