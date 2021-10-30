@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 import { Table } from 'react-bootstrap'
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { getData } from './../../redux/actions/authActions'
 
 export class Root extends Component {
+    
+    componentDidMount() {
+        this.props.getData()
+    }
+
     render() {
-        console.log(localStorage.getItem("data"))
+        console.log(this.props.auth)
         return (
             <div>
                 <Table striped bordered hover>
@@ -14,7 +22,15 @@ export class Root extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {JSON.parse(localStorage.getItem("data")).map(data => (
+                        {/* VARIANTA CU LOCALSTORAGE
+                         {JSON.parse(localStorage.getItem("data")).map(data => (
+                            <tr>
+                                <td>{data.email}</td>
+                                <td>{data.birthYear}</td>
+                            </tr>
+                        )
+                        )} */}
+                        {this.props.auth.data.map(data => (
                             <tr>
                                 <td>{data.email}</td>
                                 <td>{data.birthYear}</td>
@@ -28,4 +44,12 @@ export class Root extends Component {
     }
 }
 
-export default Root
+Root.propTypes = {
+    auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, { getData })(Root)

@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, SET_DATA } from '../types'
+import { LOGIN, LOGOUT, SET_DATA, GET_DATA } from '../types'
 import axios from 'axios'
 
 export const login = () => dispatch => {
@@ -10,10 +10,22 @@ export const logout = () => dispatch => {
 }
 
 export const setData = data => dispatch => {
+  ////VARIANTA CU LOCAL STORAGE
   //dispatch(setData2(data))
-  axios.post("/form", data)
+
+  axios.post("/data", data)
   .then(res=>dispatch({
     type: SET_DATA,
+    payload: res.data
+  }))
+  
+}
+
+export const getData = () => dispatch => {
+  
+  axios.get("/data")
+  .then(res=>dispatch({
+    type: GET_DATA,
     payload: res.data
   }))
   
