@@ -11,7 +11,7 @@ export default function(state = initialState, action) {
     case LOGIN:
       return {
         ...state,
-        is_logged_in: true
+        is_logged_in: action.payload
       };
       case LOGOUT:
       return {

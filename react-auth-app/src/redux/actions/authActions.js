@@ -1,8 +1,28 @@
 import { LOGIN, LOGOUT, SET_DATA, GET_DATA } from '../types'
 import axios from 'axios'
+import jwt_decode from "jwt-decode"
 
 export const login = () => dispatch => {
-  dispatch(setLogin())
+  //dispatch(setLogin())
+
+  //JWT
+  axios.post("/login")
+  .then(res=>{
+    const { token } = res.data
+    localStorage.setItem("is_logged_in", token)
+    setAuthToken(token)
+    const decoded = jwt_decode(token)
+    dispatch(setLogin(decoded))
+  }
+  )
+}
+
+const setAuthToken = token => {
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = token
+  } else {
+    delete axios.defaults.headers.common["Authorization"]
+  }
 }
 
 export const logout = () => dispatch => {
@@ -18,7 +38,6 @@ export const setData = data => dispatch => {
     type: SET_DATA,
     payload: res.data
   }))
-  
 }
 
 export const getData = () => dispatch => {
@@ -31,9 +50,10 @@ export const getData = () => dispatch => {
   
 }
 
-export const setLogin = () => {
+export const setLogin = (decoded) => {
   return {
-    type: LOGIN
+    type: LOGIN,
+    payload: decoded
   }
 }
 

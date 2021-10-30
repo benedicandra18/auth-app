@@ -5,6 +5,7 @@ const keys = require("../../config/keys")
 
 const Data = require("../../models/Data")
 
+//post data objects {email:..., birthYear:...}
 router.post('/data', async (req, res) => {
     try {
         const data = new Data(req.body)
@@ -17,6 +18,7 @@ router.post('/data', async (req, res) => {
     }
 })
 
+//get data objects
 router.get('/data', async (req, res) => {
     try {
         const data = await Data.find()
@@ -26,5 +28,32 @@ router.get('/data', async (req, res) => {
         return res.status(500).json({ message: err })
     }
 })
+
+router.post('/login', async (req, res) => {
+    try {
+        const payload = {
+            is_logged_in: true
+        }
+
+        jwt.sign(
+            payload,
+            keys.secretOrKey,
+            {
+              expiresIn: 600 // 10 minutes
+            },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token
+              })
+            }
+        )
+    }
+    catch (err) {
+        return res.status(500).json({ message: err })
+    }
+})
+
+
 
 module.exports = router

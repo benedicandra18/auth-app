@@ -5,13 +5,12 @@ import { connect } from "react-redux"
 import { getData } from './../../redux/actions/authActions'
 
 export class Root extends Component {
-    
+
     componentDidMount() {
         this.props.getData()
     }
 
     render() {
-        console.log(this.props.auth)
         return (
             <div>
                 <Table striped bordered hover>
