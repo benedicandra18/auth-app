@@ -10,7 +10,10 @@ function App() {
     <Router>
       <div className="App">
         <Route exact path="/login" component={Login} />
-        <Route exact path="/form" component={Form} />
+        { localStorage.getItem("is_logged_in") ? 
+        <Route exact path="/form" component={Form} />:
+        <Route exact path="/login" component={Login} />} 
+        
       </div>
     </Router>
   );
