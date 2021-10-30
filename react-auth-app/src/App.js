@@ -6,9 +6,12 @@ import Login from './components/auth/Login';
 import Form from './components/auth/Form';
 import Logout from './components/auth/Logout';
 import Root from './components/auth/Root';
+import { Provider } from 'react-redux';
+import store from './redux/store'
 
 function App() {
   return (
+    <Provider store={store}>
     <Router>
       <div className="App">
         <Route exact path="/" component={Root} />
@@ -20,6 +23,7 @@ function App() {
         
       </div>
     </Router>
+    </Provider>
   );
 }
 

@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, SET_DATA } from "../actions/types";
+import { LOGIN, LOGOUT, SET_DATA } from "../types";
 
 const initialState = {
   is_logged_in: false,

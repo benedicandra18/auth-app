@@ -36,7 +36,7 @@ app.use(passport.initialize())
 require("./config/passport")(passport)
 
 // Routes
-app.use("/api/auth", auth)
+app.use("/", auth)
 
 const port = process.env.PORT || 5000
 

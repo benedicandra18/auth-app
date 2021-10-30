@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import './Form.css'
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import {setData} from './../../redux/actions/authActions'
 
 export class FormLogin extends Component {
     constructor() {
@@ -27,6 +30,7 @@ export class FormLogin extends Component {
         }
         allData.push(data)
         localStorage.setItem("data", JSON.stringify(allData))
+        this.props.setData(allData)
         this.props.history.push("/")
     }
 
@@ -67,4 +71,12 @@ export class FormLogin extends Component {
     }
 }
 
-export default FormLogin
+FormLogin.propTypes = {
+    auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, { setData})(FormLogin)

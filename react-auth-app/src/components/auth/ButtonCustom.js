@@ -5,7 +5,9 @@ export class ButtonCustom extends Component {
     handleClickIn =()=>{
         localStorage.setItem("is_logged_in", true)
         console.log(this.props)
+        this.props.action()
         this.props.history.push("/form");
+
     }
     handleClickOut =()=>{
         localStorage.setItem("is_logged_in", false)
