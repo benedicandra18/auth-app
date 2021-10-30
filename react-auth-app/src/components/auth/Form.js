@@ -21,10 +21,15 @@ export class FormLogin extends Component {
             email: this.state.email,
             birthYear: this.state.birthYear
         }
-        localStorage.setItem("data", JSON.stringify(data))
+        var allData=[]
+        if(localStorage.getItem("data")){
+            allData=JSON.parse(localStorage.getItem("data"))
+        }
+        allData.push(data)
+        localStorage.setItem("data", JSON.stringify(allData))
         this.props.history.push("/")
     }
-    
+
     render() {
         return (
             <div>
