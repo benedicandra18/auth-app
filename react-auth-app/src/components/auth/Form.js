@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap'
 import './Form.css'
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import {setData} from './../../redux/actions/authActions'
+import {setData, getData} from './../../redux/actions/authActions'
 
 export class FormLogin extends Component {
     constructor() {
@@ -18,7 +18,7 @@ export class FormLogin extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    onSubmit = e => {
+    onSubmit = async e => {
         e.preventDefault()
         const data = {
             email: this.state.email,
@@ -32,9 +32,15 @@ export class FormLogin extends Component {
         allData.push(data)
         localStorage.setItem("data", JSON.stringify(allData))
         this.props.setData(allData)*/
-        this.props.setData(data)
+        await this.props.setData(data)
+        await this.props.getData()
         this.props.history.push("/")
     }
+
+    reRender = () => {
+        // calling the forceUpdate() method
+        this.forceUpdate();
+      };
 
     render() {
         return (
@@ -79,4 +85,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { setData})(FormLogin)
+export default connect(mapStateToProps, { setData, getData})(FormLogin)

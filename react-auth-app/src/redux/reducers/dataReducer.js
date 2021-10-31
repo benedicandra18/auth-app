@@ -1,20 +1,20 @@
-import { LOGIN, LOGOUT } from "../types";
+import { SET_DATA, GET_DATA } from "../types";
 
 const initialState = {
-  is_logged_in: false
+  data: []
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case LOGIN:
+      case SET_DATA:
       return {
         ...state,
-        is_logged_in: action.payload
+        data: action.payload
       };
-      case LOGOUT:
+      case GET_DATA:
       return {
         ...state,
-        is_logged_in: false
+        data: [...action.payload]
       };
     default:
       return state;
