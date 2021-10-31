@@ -29,19 +29,19 @@ export const logout = () => dispatch => {
   dispatch(setLogout())
 }
 
-export const setData = data => dispatch => {
+export const setData = data => async dispatch => {
   ////VARIANTA CU LOCAL STORAGE
   //dispatch(setData2(data))
 
-  axios.post("/data", data)
+  await axios.post("/data", data)
   .then(res=>dispatch({
     type: SET_DATA,
     payload: res.data
   }))
 }
 
-export const getData = () => dispatch => {
-  axios.get("/data")
+export const getData = () => async dispatch => {
+  await axios.get("/data")
   .then(res=>dispatch({
     type: GET_DATA,
     payload: res.data
