@@ -37,11 +37,6 @@ export class FormLogin extends Component {
         this.props.history.push("/")
     }
 
-    reRender = () => {
-        // calling the forceUpdate() method
-        this.forceUpdate();
-      };
-
     render() {
         return (
             <div>

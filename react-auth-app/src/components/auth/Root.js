@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Table, Button, Badge } from 'react-bootstrap'
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { getData } from './../../redux/actions/authActions'
+import { getData, sortData } from './../../redux/actions/authActions'
 
 export class Root extends Component {
     constructor(props) {
@@ -17,9 +17,7 @@ export class Root extends Component {
     }
 
     handleClick = () => {
-        this.props.data.data
-            .sort()
-            .then(res => console.log(res))
+        this.props.sortData()
     }
 
     render() {
@@ -74,4 +72,4 @@ const mapStateToProps = state => ({
     data: state.data
 })
 
-export default connect(mapStateToProps, {getData})(Root)
+export default connect(mapStateToProps, {getData, sortData})(Root)
