@@ -9,7 +9,7 @@ export class Login extends Component {
     handleClickIn = () => {
         localStorage.setItem("is_logged_in", true)
         this.props.login()
-        this.props.history.push("/form");
+        this.props.history.push("/form")
     }
 
     render() {

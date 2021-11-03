@@ -16,10 +16,11 @@ function App() {
     <Router>
       <div className="App">
         <Route exact path="/" component={Root} />
+        { localStorage.getItem("is_logged_in")!=false ? 
+        <Route exact path="/form" component={Form} />: 
         <Route exact path="/login" component={Login} />
-        { localStorage.getItem("is_logged_in") ? 
-        <Route exact path="/form" component={Form} />:
-        <Route exact path="/login" component={Login} />} 
+      }
+        <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/movies" component={Movies} />
         
